@@ -341,7 +341,39 @@ ERROR: The system was unable to find the specified registry key or value.
 
 This confirms that the Registry Run Key was successfully removed.
 
-![Registry Run Key Cleanup and Verification](screenshots/06-registry-run-key-cleanup-and-verification.png)
+![Registry Run Key Cleanup and Verification](screenshots/06-registry-run-key-removed.png)
+
+---
+
+## Registry Run Key Cleanup Evidence in Kibana
+
+In addition to verifying the cleanup locally, Kibana also showed Sysmon process creation events related to the registry cleanup commands.
+
+The query returned events showing both the registry deletion command and the verification query for the `AMDI_Lab_RunKey` value.
+
+### KQL Query Used
+
+```kql
+event.provider : "Microsoft-Windows-Sysmon" and event.code : "1" and winlog.event_data.CommandLine : *AMDI_Lab_RunKey*
+```
+
+### Evidence Observed
+
+The results included command-line activity related to:
+
+```text
+reg delete HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v AMDI_Lab_RunKey /f
+```
+
+and:
+
+```text
+reg query HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v AMDI_Lab_RunKey
+```
+
+This provided additional evidence that the cleanup activity was visible through Sysmon process creation telemetry.
+
+![Registry Run Key Cleanup Evidence in Kibana](screenshots/08-kibana-run-key-cleanup-evidence.png)
 
 ---
 
@@ -380,7 +412,7 @@ ERROR: The system cannot find the file specified.
 
 This confirms that the Scheduled Task was successfully removed.
 
-![Scheduled Task Cleanup and Verification](screenshots/07-scheduled-task-cleanup-and-verification.png)
+![Scheduled Task Cleanup and Verification](screenshots/07-scheduled-task-removed.png)
 
 ---
 
