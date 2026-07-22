@@ -507,3 +507,11 @@ Simulation → Detection → Investigation → Cleanup → Verification
 ```
 
 This project strengthened practical skills in endpoint detection, Windows event analysis, KQL querying, persistence investigation, and SOC-style documentation.
+
+---
+
+## Author
+
+**Diago Gonzalez**
+CompTIA Security+ | Google Cybersecurity Professional Certificate
+[LinkedIn](https://www.linkedin.com/in/diagogonz) | [GitHub](https://github.com/Dovahk11n0)
